@@ -1,0 +1,66 @@
+<?php
+
+return [
+    'booking-cpt-args'      => [
+        'labels'                => [
+            'name'               => _x('Bookings', 'booking post type general name', 'eddbk'),
+            'singular_name'      => _x('Booking', 'booking post type singular name', 'eddbk'),
+            'menu_name'          => _x('Bookings', 'bookings admin menu text', 'eddbk'),
+            'name_admin_bar'     => _x('Booking', 'bookings "add new" text on admin bar', 'eddbk'),
+            'add_new'            => _x('Add New', 'booking', 'eddbk'),
+            'add_new_item'       => __('Add New Booking', 'eddbk'),
+            'new_item'           => __('New Booking', 'eddbk'),
+            'edit_item'          => __('Edit Booking', 'eddbk'),
+            'view_item'          => __('View Booking', 'eddbk'),
+            'all_items'          => __('Bookings', 'eddbk'),
+            'search_items'       => __('Search Bookings', 'eddbk'),
+            'parent_item_colon'  => __('Parent Bookings:', 'eddbk'),
+            'not_found'          => __('No bookings found.', 'eddbk'),
+            'not_found_in_trash' => __('No bookings found in Trash.', 'eddbk'),
+        ],
+        'public'                => false,
+        'exclude_from_search'   => true,
+        'publicly_queryable'    => false,
+        'show_ui'               => false,
+        'show_in_nav_menus'     => false,
+        'show_in_menu'          => false,
+        'show_in_admin_bar'     => false,
+        'menu_icon'             => 'dashicons-calendar',
+        'capability_type'       => null, // We explicitly declare `capabilities` instead
+        'capabilities'          => [
+            'publish_posts'      => 'publish_bookings',
+            'create_posts'       => 'edit_bookings',
+            'edit_post'          => 'edit_booking',
+            'edit_posts'         => 'edit_bookings',
+            'edit_others_posts'  => 'edit_others_bookings',
+            'read_post'          => 'read_booking',
+            'read_private_posts' => 'read_private_bookings',
+            'delete_post'        => 'delete_booking',
+        ],
+        'map_meta_cap'          => null, // We explicitly add capabilities to roles
+        'hierarchical'          => false,
+        'supports'              => [''], // Empty array is ignored and results in default ['title', 'content']
+        'register_meta_box_cb'  => null,
+        'taxonomies'            => [],
+        'has_archive'           => false,
+        'rewrite'               => false,
+        'permalink_epmask'      => EP_PERMALINK,
+        'query_var'             => true,
+        'can_export'            => true,
+        'delete_with_user'      => false,
+        'show_in_rest'          => false,
+        'rest_base'             => 'booking',
+        'rest_controller_class' => null,
+    ],
+    'booking-cpt-role-caps' => [
+        'administrator' => [
+            'publish_bookings',
+            'edit_booking',
+            'edit_bookings',
+            'edit_other_bookings',
+            'read_booking',
+            'read_private_bookings',
+            'delete_booking',
+        ],
+    ],
+];
