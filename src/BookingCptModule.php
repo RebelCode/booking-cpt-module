@@ -3,6 +3,7 @@
 namespace RebelCode\Bookings\WordPress\Module;
 
 use Dhii\Data\Container\ContainerFactoryInterface;
+use Dhii\Exception\InternalException;
 use Psr\Container\ContainerInterface;
 use Psr\EventManager\EventManagerInterface;
 use RebelCode\Modular\Module\AbstractBaseModule;
@@ -20,10 +21,17 @@ class BookingCptModule extends AbstractBaseModule
      * @since [*next-version*]
      *
      * @param ContainerFactoryInterface $containerFactory The container factory.
+     *
+     * @throws InternalException If an error occurred while trying to load the config.
      */
     public function __construct($containerFactory)
     {
-        $this->_initModule($containerFactory, 'booking-cpt', ['wp-events']);
+        $this->_initModule(
+            $containerFactory,
+            'booking-cpt',
+            ['wp-events'],
+            $this->_loadPhpConfigFile(__DIR__ . '/../config.php')
+        );
     }
 
     /**
