@@ -1,5 +1,5 @@
 {
-    "name": "rebelcode/rcmod-booking-cpt",
+    "name": "rebelcode/rcmod-wp-booking-cpt",
     "description": "A RebelCode module for a WordPress CPT for bookings.",
     "type": "rc-module",
     "license": "GPL-3.0",
