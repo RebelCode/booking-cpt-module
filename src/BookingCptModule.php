@@ -3,7 +3,9 @@
 namespace RebelCode\Bookings\WordPress\Module;
 
 use Dhii\Data\Container\ContainerFactoryInterface;
+use Dhii\Event\EventFactoryInterface;
 use Dhii\Exception\InternalException;
+use Dhii\Util\String\StringableInterface as Stringable;
 use Psr\Container\ContainerInterface;
 use Psr\EventManager\EventManagerInterface;
 use RebelCode\Modular\Module\AbstractBaseModule;
@@ -20,18 +22,16 @@ class BookingCptModule extends AbstractBaseModule
      *
      * @since [*next-version*]
      *
-     * @param ContainerFactoryInterface $containerFactory The container factory.
+     * @param string|Stringable              $key              The module key.
+     * @param ContainerFactoryInterface|null $containerFactory The container factory, if any.
+     * @param EventManagerInterface|null     $eventManager     The event manager, if any.
+     * @param EventFactoryInterface|null     $eventFactory     The event factory, if any.
      *
      * @throws InternalException If an error occurred while trying to load the config.
      */
-    public function __construct($containerFactory)
+    public function __construct($key, $containerFactory, $eventManager, $eventFactory)
     {
-        $this->_initModule(
-            $containerFactory,
-            'booking-cpt',
-            ['wp-events'],
-            $this->_loadPhpConfigFile(__DIR__ . '/../config.php')
-        );
+        $this->_initModule($containerFactory, $key, [], $this->_loadPhpConfigFile(RC_WP_BOOKING_CPT_MODULE_CONFIG));
     }
 
     /**
@@ -52,7 +52,7 @@ class BookingCptModule extends AbstractBaseModule
     public function run(ContainerInterface $c = null)
     {
         /* @var $eventManager EventManagerInterface */
-        $eventManager = $c->get('event-manager');
+        $eventManager = $c->get('event_manager');
 
         $eventManager->attach('init', [$this, 'registerCpt']);
         $eventManager->attach('admin_init', [$this, 'addAdminCapabilities']);
@@ -67,7 +67,7 @@ class BookingCptModule extends AbstractBaseModule
     {
         $config = $this->_getConfig();
 
-        register_post_type('booking', $config['booking-cpt-args']);
+        register_post_type('booking', $config['booking_cpt_args']);
     }
 
     /**
@@ -79,7 +79,7 @@ class BookingCptModule extends AbstractBaseModule
     {
         $config = $this->_getConfig();
 
-        foreach ($config['booking-cpt-role-caps'] as $_roleKey => $_capabilities) {
+        foreach ($config['booking_cpt_role_caps'] as $_roleKey => $_capabilities) {
             $_role = get_role($_roleKey);
 
             foreach ($_capabilities as $_cap) {

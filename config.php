@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'booking-cpt-args'      => [
+    'booking_cpt_args'      => [
         'labels'                => [
             'name'               => _x('Bookings', 'booking post type general name', 'eddbk'),
             'singular_name'      => _x('Booking', 'booking post type singular name', 'eddbk'),
@@ -52,7 +52,7 @@ return [
         'rest_base'             => 'booking',
         'rest_controller_class' => null,
     ],
-    'booking-cpt-role-caps' => [
+    'booking_cpt_role_caps' => [
         'administrator' => [
             'publish_bookings',
             'edit_booking',
