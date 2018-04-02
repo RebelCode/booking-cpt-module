@@ -1,5 +1,5 @@
 {
-    "name": "rebelcode/booking-cpt-module",
+    "name": "rebelcode/rcmod-wp-booking-cpt",
     "description": "A RebelCode module for a WordPress CPT for bookings.",
     "type": "rc-module",
     "license": "GPL-3.0",
@@ -13,7 +13,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^5.4 | ^7.0",
-        "rebelcode/modular": "dev-task/initial-classes"
+        "rebelcode/modular": "dev-task/initial-classes",
+        "rebelcode/wp-cqrs-resource-models": "dev-task/initial-classes"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
