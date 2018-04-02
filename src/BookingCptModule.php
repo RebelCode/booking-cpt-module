@@ -32,6 +32,7 @@ class BookingCptModule extends AbstractBaseModule
     public function __construct($key, $containerFactory, $eventManager, $eventFactory)
     {
         $this->_initModule($containerFactory, $key, [], $this->_loadPhpConfigFile(RC_WP_BOOKING_CPT_MODULE_CONFIG));
+        $this->_initModuleEvents($eventManager, $eventFactory);
     }
 
     /**
@@ -51,11 +52,8 @@ class BookingCptModule extends AbstractBaseModule
      */
     public function run(ContainerInterface $c = null)
     {
-        /* @var $eventManager EventManagerInterface */
-        $eventManager = $c->get('event_manager');
-
-        $eventManager->attach('init', [$this, 'registerCpt']);
-        $eventManager->attach('admin_init', [$this, 'addAdminCapabilities']);
+        $this->_attach('init', [$this, 'registerCpt']);
+        $this->_attach('admin_init', [$this, 'addAdminCapabilities']);
     }
 
     /**
